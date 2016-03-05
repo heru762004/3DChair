@@ -11,7 +11,7 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,37 +31,37 @@ class GameViewController: UIViewController {
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
         
+        // enable default lighting
+        //scnView.autoenablesDefaultLighting = true
+        
         // configure the view
         scnView.backgroundColor = UIColor.darkGrayColor()
         
         let shape = scene.rootNode.childNodeWithName("Chair.015", recursively: true)
         print(shape)
         let chair = shape?.geometry?.firstMaterial
-        chair?.diffuse.contents = UIColor(patternImage: UIImage(named: "wood")!)//UIImage(named: "wood")
+        //chair?.diffuse.contents = UIColor.blackColor()//UIImage(named: "wood")//UIImage(named: "wood")
+        chair?.diffuse.contents = UIColor.blackColor()
+        // Create a reflective floor and configure it
+        let floor = SCNFloor()
+        floor.reflectionFalloffEnd = 100.0 // Set a falloff end value for the reflection
+        floor.firstMaterial!.diffuse.contents = UIImage(named: "wood")// Set a diffuse texture, here a pavement image
         
-        let spot = SCNLight()
-        spot.type = SCNLightTypeSpot
-        spot.castsShadow = true
+        // Create a node to attach the floor to, and add it to the scene
+        let floorNode = SCNNode()
+        floorNode.geometry = floor
+        floorNode.name = "floor"
+        scene.rootNode.addChildNode(floorNode)
         
-        let spotNode = SCNNode()
-        spotNode.light = spot
-        spotNode.position = SCNVector3(x: 10, y: 150, z: 0)
-        spotNode.castsShadow = true
-        scene.rootNode.addChildNode(spotNode)
-        
-        
-//        let wall = SCNNode(geometry: SCNBox(width: 400, height: 200, length: 4, chamferRadius: 0))
-//        wall.geometry?.firstMaterial!.emission.contents = UIColor.lightGrayColor()
-//        wall.geometry?.firstMaterial!.doubleSided = false
-//        wall.castsShadow = true
-//        wall.position = SCNVector3Make(10, 150, -85)
-//        wall.physicsBody = SCNPhysicsBody.staticBody()
-//        scene.rootNode.addChildNode(wall)
-
+        let cameraNode = SCNNode()
+        cameraNode.camera = SCNCamera()
+        cameraNode.position = SCNVector3Make(0, 0, 25)
+        scene.rootNode.addChildNode(cameraNode)
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
         scnView.addGestureRecognizer(tapGesture)
+    
     }
     
     func handleTap(gestureRecognize: UIGestureRecognizer) {
