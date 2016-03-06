@@ -15,6 +15,8 @@
 		12A750971C8A73B60086E400 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12A750951C8A73B60086E400 /* LaunchScreen.storyboard */; };
 		12A750A21C8A73B60086E400 /* MyChairTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A750A11C8A73B60086E400 /* MyChairTests.swift */; };
 		12A750AD1C8A73B70086E400 /* MyChairUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A750AC1C8A73B70086E400 /* MyChairUITests.swift */; };
+		12A750BF1C8BBE140086E400 /* Fire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 12A750BD1C8BBE140086E400 /* Fire.scnp */; };
+		12A750C01C8BBE140086E400 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A750BE1C8BBE140086E400 /* spark.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		12A750A81C8A73B70086E400 /* MyChairUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyChairUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		12A750AC1C8A73B70086E400 /* MyChairUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyChairUITests.swift; sourceTree = "<group>"; };
 		12A750AE1C8A73B70086E400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12A750BD1C8BBE140086E400 /* Fire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Fire.scnp; sourceTree = "<group>"; };
+		12A750BE1C8BBE140086E400 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +110,8 @@
 				12A750931C8A73B60086E400 /* Assets.xcassets */,
 				12A750951C8A73B60086E400 /* LaunchScreen.storyboard */,
 				12A750981C8A73B60086E400 /* Info.plist */,
+				12A750BD1C8BBE140086E400 /* Fire.scnp */,
+				12A750BE1C8BBE140086E400 /* spark.png */,
 			);
 			path = MyChair;
 			sourceTree = "<group>";
@@ -233,8 +239,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				12A7508D1C8A73B60086E400 /* art.scnassets in Resources */,
+				12A750C01C8BBE140086E400 /* spark.png in Resources */,
 				12A750971C8A73B60086E400 /* LaunchScreen.storyboard in Resources */,
 				12A750941C8A73B60086E400 /* Assets.xcassets in Resources */,
+				12A750BF1C8BBE140086E400 /* Fire.scnp in Resources */,
 				12A750921C8A73B60086E400 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -12,18 +12,22 @@ import SceneKit
 
 class GameViewController: UIViewController {
     
+    var chair:SCNMaterial = SCNMaterial()
+    var scnView:SCNView = SCNView()
+    var chairShape:SCNNode = SCNNode()
+    var particleSystem:SCNParticleSystem = SCNParticleSystem()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // create a new scene
         //let scene = SCNScene(named: "art.scnassets/ship.scn")!
-        let scene = SCNScene(named: "art.scnassets/Chair.dae")!
-                
+        let masterScene = SCNScene()
         // retrieve the SCNView
-        let scnView = self.view as! SCNView
+        scnView = self.view as! SCNView
         
         // set the scene to the view
-        scnView.scene = scene
+        scnView.scene = masterScene
         
         // allows the user to manipulate the camera
         scnView.allowsCameraControl = true
@@ -37,11 +41,21 @@ class GameViewController: UIViewController {
         // configure the view
         scnView.backgroundColor = UIColor.darkGrayColor()
         
-        let shape = scene.rootNode.childNodeWithName("Chair.015", recursively: true)
-        print(shape)
-        let chair = shape?.geometry?.firstMaterial
-        //chair?.diffuse.contents = UIColor.blackColor()//UIImage(named: "wood")//UIImage(named: "wood")
-        chair?.diffuse.contents = UIColor.blackColor()
+        // load the chair dae resource to scene
+        if let scene = SCNScene(named: "art.scnassets/Chair.dae") {
+            if let shape = scene.rootNode.childNodeWithName("Chair.015", recursively: true) {
+                chairShape = shape
+                print(shape)
+                chair = (shape.geometry?.firstMaterial)!
+                chair.diffuse.contents = UIColor.blackColor()
+                chair.normal.contents = UIImage(named:"wood")
+                
+                //chair?.diffuse.contents = UIColor.blackColor()//UIImage(named: "wood")//UIImage(named: "wood")
+                scnView.scene?.rootNode.addChildNode(shape)
+                
+            }
+        }
+        
         // Create a reflective floor and configure it
         let floor = SCNFloor()
         floor.reflectionFalloffEnd = 100.0 // Set a falloff end value for the reflection
@@ -51,13 +65,8 @@ class GameViewController: UIViewController {
         let floorNode = SCNNode()
         floorNode.geometry = floor
         floorNode.name = "floor"
-        scene.rootNode.addChildNode(floorNode)
-        
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        cameraNode.position = SCNVector3Make(0, 0, 25)
-        scene.rootNode.addChildNode(cameraNode)
-        
+        scnView.scene?.rootNode.addChildNode(floorNode)
+                
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
         scnView.addGestureRecognizer(tapGesture)
@@ -78,25 +87,38 @@ class GameViewController: UIViewController {
             
             // get its material
             let material = result.node!.geometry!.firstMaterial!
-            // highlight it
-            SCNTransaction.begin()
-            SCNTransaction.setAnimationDuration(0.5)
             
-            // on completion - unhighlight
-            SCNTransaction.setCompletionBlock {
+            if material == chair {
+                addFire()
+                // highlight it
                 SCNTransaction.begin()
                 SCNTransaction.setAnimationDuration(0.5)
                 
-                material.emission.contents = UIColor.blackColor()
+                // on completion - unhighlight
+                SCNTransaction.setCompletionBlock {
+                    SCNTransaction.begin()
+                    SCNTransaction.setAnimationDuration(0.5)
+                    
+                    material.emission.contents = UIColor.blackColor()
+                    
+                    SCNTransaction.commit()
+                }
+                
+                material.emission.contents = UIColor.redColor()
                 
                 SCNTransaction.commit()
             }
-            
-            material.emission.contents = UIColor.redColor()
-            
-            SCNTransaction.commit()
         }
     }
+    
+    
+    func addFire() {
+        particleSystem = SCNParticleSystem(named: "Fire", inDirectory: nil)!
+        particleSystem.emitterShape = chairShape.geometry
+        chairShape.addParticleSystem(particleSystem)
+
+    }
+    
     
     override func shouldAutorotate() -> Bool {
         return true
