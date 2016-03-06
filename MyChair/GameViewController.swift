@@ -11,13 +11,19 @@ import QuartzCore
 import SceneKit
 
 class GameViewController: UIViewController {
-    
+    // chair material
     var chair:SCNMaterial = SCNMaterial()
+    // view
     var scnView:SCNView = SCNView()
+    // chair node
     var chairShape:SCNNode = SCNNode()
+    // fire particle system
     var particleSystem:SCNParticleSystem = SCNParticleSystem()
+    // rain particle system
     var rainParticleSystem:SCNParticleSystem = SCNParticleSystem()
+    // fire birth rate
     var fireBirthRate:CGFloat = 0.0
+    // rain birth rate
     var rainBirthRate:CGFloat = 0.0
     
     var isAnimationStop:Bool = true
@@ -118,7 +124,7 @@ class GameViewController: UIViewController {
         }
     }
     
-    
+    // add fire to the chair
     func addFire() {
         particleSystem = SCNParticleSystem(named: "Fire", inDirectory: nil)!
         particleSystem.emitterShape = chairShape.geometry
@@ -128,11 +134,13 @@ class GameViewController: UIViewController {
         self.performSelector(Selector("showRain"), withObject: nil, afterDelay: 10.0)
     }
     
+    // kill the fire
     func killFire() {
         particleSystem.birthRate = 0.0
         self.performSelector(Selector("killRain"), withObject: nil, afterDelay: 15.0)
     }
     
+    // add water shower
     func showRain() {
         self.performSelector(Selector("killFire"), withObject: nil, afterDelay: 5.0)
         rainParticleSystem = SCNParticleSystem(named: "Rain", inDirectory: nil)!
@@ -141,6 +149,7 @@ class GameViewController: UIViewController {
         chairShape.addParticleSystem(rainParticleSystem)
     }
     
+    // stop the water shower
     func killRain() {
         rainParticleSystem.birthRate = 0.0
         isAnimationStop = true
