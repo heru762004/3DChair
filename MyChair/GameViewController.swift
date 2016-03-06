@@ -16,6 +16,11 @@ class GameViewController: UIViewController {
     var scnView:SCNView = SCNView()
     var chairShape:SCNNode = SCNNode()
     var particleSystem:SCNParticleSystem = SCNParticleSystem()
+    var rainParticleSystem:SCNParticleSystem = SCNParticleSystem()
+    var fireBirthRate:CGFloat = 0.0
+    var rainBirthRate:CGFloat = 0.0
+    
+    var isAnimationStop:Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +71,7 @@ class GameViewController: UIViewController {
         floorNode.geometry = floor
         floorNode.name = "floor"
         scnView.scene?.rootNode.addChildNode(floorNode)
+        
                 
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: "handleTap:")
@@ -88,7 +94,8 @@ class GameViewController: UIViewController {
             // get its material
             let material = result.node!.geometry!.firstMaterial!
             
-            if material == chair {
+            if material == chair && isAnimationStop == true {
+                isAnimationStop = false
                 addFire()
                 // highlight it
                 SCNTransaction.begin()
@@ -115,10 +122,29 @@ class GameViewController: UIViewController {
     func addFire() {
         particleSystem = SCNParticleSystem(named: "Fire", inDirectory: nil)!
         particleSystem.emitterShape = chairShape.geometry
+        particleSystem.emissionDuration = 5.0
+        fireBirthRate = particleSystem.birthRate
         chairShape.addParticleSystem(particleSystem)
-
+        self.performSelector(Selector("showRain"), withObject: nil, afterDelay: 10.0)
     }
     
+    func killFire() {
+        particleSystem.birthRate = 0.0
+        self.performSelector(Selector("killRain"), withObject: nil, afterDelay: 15.0)
+    }
+    
+    func showRain() {
+        self.performSelector(Selector("killFire"), withObject: nil, afterDelay: 5.0)
+        rainParticleSystem = SCNParticleSystem(named: "Rain", inDirectory: nil)!
+        rainParticleSystem.warmupDuration = 1.0
+        rainBirthRate = rainParticleSystem.birthRate
+        chairShape.addParticleSystem(rainParticleSystem)
+    }
+    
+    func killRain() {
+        rainParticleSystem.birthRate = 0.0
+        isAnimationStop = true
+    }
     
     override func shouldAutorotate() -> Bool {
         return true

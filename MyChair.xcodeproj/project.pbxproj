@@ -17,6 +17,7 @@
 		12A750AD1C8A73B70086E400 /* MyChairUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12A750AC1C8A73B70086E400 /* MyChairUITests.swift */; };
 		12A750BF1C8BBE140086E400 /* Fire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 12A750BD1C8BBE140086E400 /* Fire.scnp */; };
 		12A750C01C8BBE140086E400 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 12A750BE1C8BBE140086E400 /* spark.png */; };
+		12A750C21C8BF6E60086E400 /* Rain.scnp in Resources */ = {isa = PBXBuildFile; fileRef = 12A750C11C8BF6E60086E400 /* Rain.scnp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		12A750AE1C8A73B70086E400 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12A750BD1C8BBE140086E400 /* Fire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Fire.scnp; sourceTree = "<group>"; };
 		12A750BE1C8BBE140086E400 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		12A750C11C8BF6E60086E400 /* Rain.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Rain.scnp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				12A750981C8A73B60086E400 /* Info.plist */,
 				12A750BD1C8BBE140086E400 /* Fire.scnp */,
 				12A750BE1C8BBE140086E400 /* spark.png */,
+				12A750C11C8BF6E60086E400 /* Rain.scnp */,
 			);
 			path = MyChair;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 			files = (
 				12A7508D1C8A73B60086E400 /* art.scnassets in Resources */,
 				12A750C01C8BBE140086E400 /* spark.png in Resources */,
+				12A750C21C8BF6E60086E400 /* Rain.scnp in Resources */,
 				12A750971C8A73B60086E400 /* LaunchScreen.storyboard in Resources */,
 				12A750941C8A73B60086E400 /* Assets.xcassets in Resources */,
 				12A750BF1C8BBE140086E400 /* Fire.scnp in Resources */,
