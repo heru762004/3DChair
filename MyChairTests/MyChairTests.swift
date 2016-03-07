@@ -24,6 +24,7 @@ class MyChairTests: XCTestCase {
         super.tearDown()
     }
     
+    // add fire, water, kill fire, kill water
     func testFunctionality() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
@@ -39,6 +40,12 @@ class MyChairTests: XCTestCase {
         XCTAssertEqual(obj?.chairShape.particleSystems?.count, 0)
         
     }
+    
+    // test function handle tap
+//    func testHandleTap() {
+//        let tapGesture = UITapGestureRecognizer()
+//        obj?.handleTap(tapGesture)
+//    }
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
