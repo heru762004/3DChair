@@ -10,8 +10,11 @@ import XCTest
 @testable import MyChair
 
 class MyChairTests: XCTestCase {
+    var obj:GameViewController?
+    var expectation:XCTestExpectation!
     
     override func setUp() {
+        obj = GameViewController()
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -21,9 +24,20 @@ class MyChairTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
+    func testFunctionality() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        obj?.addFire()
+        let zeroValue:CGFloat = 0.0
+        XCTAssertGreaterThan((obj?.fireBirthRate)!, zeroValue)
+        XCTAssertEqual(obj?.chairShape.particleSystems?.count, 1)
+        obj?.showRain()
+        XCTAssertEqual(obj?.chairShape.particleSystems?.count, 2)
+        obj?.killFire()
+        XCTAssertEqual(obj?.chairShape.particleSystems?.count, 1)
+        obj?.killRain()
+        XCTAssertEqual(obj?.chairShape.particleSystems?.count, 0)
+        
     }
     
     func testPerformanceExample() {

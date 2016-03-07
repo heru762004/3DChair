@@ -59,18 +59,17 @@ class GameViewController: UIViewController {
                 print(shape)
                 chair = (shape.geometry?.firstMaterial)!
                 chair.diffuse.contents = UIColor.blackColor()
-                chair.normal.contents = UIImage(named:"wood")
                 
                 //chair?.diffuse.contents = UIColor.blackColor()//UIImage(named: "wood")//UIImage(named: "wood")
                 scnView.scene?.rootNode.addChildNode(shape)
-                
             }
         }
+        
         
         // Create a reflective floor and configure it
         let floor = SCNFloor()
         floor.reflectionFalloffEnd = 100.0 // Set a falloff end value for the reflection
-        floor.firstMaterial!.diffuse.contents = UIImage(named: "wood")// Set a diffuse texture, here a pavement image
+        floor.firstMaterial!.diffuse.contents = UIImage(named: "bg_wood")// Set a diffuse texture, here a pavement image
         
         // Create a node to attach the floor to, and add it to the scene
         let floorNode = SCNNode()
@@ -137,6 +136,7 @@ class GameViewController: UIViewController {
     // kill the fire
     func killFire() {
         particleSystem.birthRate = 0.0
+        chairShape.removeParticleSystem(particleSystem)
         self.performSelector(Selector("killRain"), withObject: nil, afterDelay: 15.0)
     }
     
@@ -152,6 +152,7 @@ class GameViewController: UIViewController {
     // stop the water shower
     func killRain() {
         rainParticleSystem.birthRate = 0.0
+        chairShape.removeParticleSystem(rainParticleSystem)
         isAnimationStop = true
     }
     
